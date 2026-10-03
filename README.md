@@ -1,8 +1,6 @@
 # Linux-Monitoring-Zabbix-Telegram-Case-Study
 Linux server monitoring and automated alerting using Zabbix and Telegram for infrastructure health, service status, and operational visibility.
 
-# Linux Monitoring with Zabbix and Telegram
-
 ## Overview
 
 This case study demonstrates a Linux infrastructure monitoring and alerting solution built with Zabbix and Telegram.
