@@ -78,8 +78,9 @@ The monitoring architecture can be reused across additional Linux servers and se
 ```mermaid
 flowchart LR
     A[Linux Servers] --> B[Zabbix Agent]
-    N[Network Devices<br/>Switch / Router / Firewall / UPS] --> S[SNMP]
-    
+
+    N[Network Devices<br/>Switch / Router / Firewall / UPS] --> S[SNMP<br/>Prefer SNMPv3]
+
     B --> C[Zabbix Server]
     S --> C
 
@@ -119,13 +120,35 @@ The monitoring solution can include:
 - Packet loss
 - Latency
 
-### Services
+### Network Devices
 
-- systemd service state
-- Application processes
-- Web services
-- Database services
-- Monitoring agents
+Network infrastructure can be monitored through SNMP.
+
+Typical monitored devices include:
+
+- Ethernet switches
+- Routers
+- Firewalls
+- Wireless controllers
+- UPS devices
+- Other SNMP-capable infrastructure
+
+Typical monitoring items include:
+
+- Device availability
+- Device uptime
+- Interface operational status
+- Interface traffic utilization
+- Interface errors and discards
+- CPU utilization
+- Memory utilization
+- Temperature
+- Fan status
+- Power supply status
+- Hardware health
+- SNMP trap events
+
+SNMPv3 is preferred where supported because it provides authentication and encryption capabilities.
 
 ### Operational Jobs
 
