@@ -157,5 +157,71 @@ SNMPv3 is preferred where supported because it provides authentication and encry
 - Data update status
 - Application health checks
 
+## Alert Workflow
+
+## Example Incident Flow
+
+This example shows how an infrastructure event is detected and escalated.
+
+### Scenario: Network Uplink Failure
+
+```mermaid
+flowchart TD
+    A[Network Switch] --> B[SNMP Monitoring]
+    B --> C[Zabbix Server]
+    C --> D{Uplink Interface Down?}
+
+    D -- No --> E[Continue Monitoring]
+    D -- Yes --> F[Trigger Problem Event]
+    F --> G[Assign Severity]
+    G --> H[Send Telegram Alert]
+    H --> I[Administrator Investigation]
+    I --> J[Network Issue Resolved]
+    J --> K[Zabbix Detects Recovery]
+    K --> L[Send Recovery Notification]
+```
+
+Detection
+Zabbix continuously monitors the network device through SNMP.
+The monitored information may include:
+- Interface operational status
+- Traffic utilization
+- Error counters
+- Device availability
+- Uptime
+
+Trigger
+If a monitored uplink changes from an operational state to a down state, Zabbix generates a problem event.
+The trigger should only be enabled for interfaces that are operationally important.
+
+Notification
+A Telegram notification can include:
+- Device name
+- Interface name
+- Problem description
+- Severity
+- Event time
+- Current status
+
+Recovery
+When the interface returns to the expected operational state, Zabbix closes the problem event and sends a recovery notification.
+
+Operational Principle
+Monitoring is useful only when an alert leads to a clear operational action.
+A good incident workflow should provide:
+1. Detection
+2. Context
+3. Severity
+4. Notification
+5. Investigation
+6. Recovery confirmation
+
+## Validation
+
+
+## Reusable Validation Checklist
+
+
 For the full reusable validation procedure, see [Infrastructure Monitoring Validation Checklist](docs/monitoring-validation-checklist.md).
+
 
