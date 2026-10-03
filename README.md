@@ -157,3 +157,5 @@ SNMPv3 is preferred where supported because it provides authentication and encry
 - Data update status
 - Application health checks
 
+For the full reusable validation procedure, see [Infrastructure Monitoring Validation Checklist](docs/monitoring-validation-checklist.md).
+
