@@ -78,9 +78,14 @@ The monitoring architecture can be reused across additional Linux servers and se
 ```mermaid
 flowchart LR
     A[Linux Servers] --> B[Zabbix Agent]
+    N[Network Devices<br/>Switch / Router / Firewall / UPS] --> S[SNMP]
+    
     B --> C[Zabbix Server]
+    S --> C
+
     C --> D[Triggers / Monitoring Rules]
     D --> E[Alert Engine]
+
     E --> F[Telegram]
     C --> G[Zabbix Dashboard]
 
