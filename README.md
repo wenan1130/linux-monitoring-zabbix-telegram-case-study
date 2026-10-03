@@ -181,20 +181,23 @@ flowchart TD
     K --> L[Send Recovery Notification]
 ```
 
-Detection
+## Detection
+
 Zabbix continuously monitors the network device through SNMP.
+
 The monitored information may include:
+
 - Interface operational status
 - Traffic utilization
 - Error counters
 - Device availability
 - Uptime
 
-Trigger
+## Trigger
 If a monitored uplink changes from an operational state to a down state, Zabbix generates a problem event.
 The trigger should only be enabled for interfaces that are operationally important.
 
-Notification
+## Notification
 A Telegram notification can include:
 - Device name
 - Interface name
@@ -203,10 +206,48 @@ A Telegram notification can include:
 - Event time
 - Current status
 
-Recovery
+## Investigation and Response
+
+After receiving the alert, the administrator investigates the affected device and determines whether the event represents a real infrastructure problem.
+
+The investigation may include:
+
+- Confirming whether the device is reachable
+- Checking the affected interface status
+- Reviewing interface traffic and error counters
+- Verifying whether the uplink is physically connected
+- Checking for recent configuration changes
+- Reviewing related alerts from adjacent network devices
+- Determining whether the issue affects one interface or multiple systems
+- Checking whether redundant links or failover paths are operating correctly
+- Reviewing device logs where available
+
+The response depends on the cause of the incident.
+
+Possible actions may include:
+
+- Reconnecting or replacing a failed cable
+- Checking switch port configuration
+- Restoring an administratively disabled interface
+- Investigating upstream network connectivity
+- Verifying firewall or routing changes
+- Failing over to a redundant path
+- Escalating the issue to the network or infrastructure team
+
+The objective is to identify the root cause, restore service, and verify that the monitored condition returns to the expected state.
+
+## Recovery
 When the interface returns to the expected operational state, Zabbix closes the problem event and sends a recovery notification.
 
-Operational Principle
+The administrator should also confirm that:
+
+- The interface remains stable
+- Traffic has returned to normal
+- Error counters are not increasing abnormally
+- Dependent systems are reachable
+- No related critical alerts remain open
+
+## Operational Principle
 Monitoring is useful only when an alert leads to a clear operational action.
 A good incident workflow should provide:
 1. Detection
@@ -218,9 +259,18 @@ A good incident workflow should provide:
 
 ## Validation
 
+The monitoring workflow should confirm that:
+
+- [ ] The monitored device is reachable
+- [ ] SNMP polling is successful
+- [ ] Interface status is collected
+- [ ] The trigger activates correctly
+- [ ] Telegram notification is delivered
+- [ ] Investigation information is available
+- [ ] Recovery is detected correctly
+- [ ] Recovery notification is delivered
 
 ## Reusable Validation Checklist
-
 
 For the full reusable validation procedure, see [Infrastructure Monitoring Validation Checklist](docs/monitoring-validation-checklist.md).
 
